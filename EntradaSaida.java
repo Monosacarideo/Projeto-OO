@@ -17,6 +17,7 @@ public class EntradaSaida {
                 "\nEscolha uma opção para tratativas acerca de voluntariado:\n\n" +
                 "8 - Realizar cadastro para voluntariado \n" +
                 "9 - Visualizar voluntários cadastrados\n" +
+                "10 - Editar informações dos voluntários cadastrados\n" +
                 "0 - Sair do programa \n");
     }
 
@@ -35,6 +36,16 @@ public class EntradaSaida {
     // Solicitar ID
     public static void solicitarId(String msg) {
         System.out.print("Informe o ID do cadastro que deseja "+ msg +":" );
+    }
+
+    public static void escolherOpcaoMenuVoluntarios() {
+             System.out.print("Oque você deseja alterar? \n" +
+                "1 - Nome\n" +
+                "2 - Idade \n" +
+                "3 - Endereço \n" +
+                "4 - Telefone \n" +
+                "5 - Voltar ao menu principal \n" +
+                "0 - Sair \n");
     }
 
     // System.out.println("Insira o seu usuário: ");
