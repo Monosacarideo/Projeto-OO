@@ -1,21 +1,30 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
-import javax.swing.JOptionPane;
 
 public class GestaoVoluntario {
 
   public ArrayList<Voluntario> listaDeVoluntarios = new ArrayList<Voluntario>();
+  Scanner scan = new Scanner(System.in);
 
   public void adicionarVoluntario(Voluntario Voluntario) {
+    int id = 1;
+    for (Voluntario v : this.listaDeVoluntarios) {
+      if (v.idVoluntario >= id) {
+        id = v.idVoluntario + 1;
+      }
+    }
+    Voluntario.idVoluntario = id;
     this.listaDeVoluntarios.add(Voluntario);
   }
 
   // Mostrar voluntários cadastrados
   public String mostrarVoluntariosCadastrados() {
     String mensagem = "";
+    mensagem += "\nAs informações dos voluntários cadastrados são: \n ";
     for (Voluntario v : this.listaDeVoluntarios) {
-      mensagem += "\nAs informações dos voluntários cadastrados são: \n ";
-      mensagem += "\n Nome: " +
+      
+      mensagem +="\n ID do cadastro: "+v.idVoluntario +"\n Nome: " +
           v.nomeVoluntario +
           "\n Idade: " +
           v.idadeVoluntario +
@@ -24,20 +33,20 @@ public class GestaoVoluntario {
           "\n Endereço: " +
           v.enderecoVoluntario +
           "\n Telefone: " +
-          v.telefone;
+          v.telefone+"\n";
     }
     return mensagem;
   }
 
   // Editar nome voluntário
-  public String alterarNomeVoluntario(int idVoluntario) {
+  public String alterarNomeVoluntario(int id) {
     boolean encontrado = false;
 
     for (Voluntario v : this.listaDeVoluntarios) {
-      int id = 0;
       encontrado = true;
       if (v.idVoluntario == id) {
-        v.nomeVoluntario = JOptionPane.showInputDialog("Informe o novo nome do voluntário: ");
+        System.out.println("Informe o novo nome do voluntário: ");
+        v.nomeVoluntario = scan.next();
       }
     }
     if (encontrado == true) {
@@ -49,14 +58,14 @@ public class GestaoVoluntario {
   }
 
   // Editar idade voluntário
-   public String alterarIdadeVoluntario(int idVoluntario) {
+  public String alterarIdadeVoluntario(int id) {
     boolean encontrado = false;
 
     for (Voluntario v : this.listaDeVoluntarios) {
-      int id = 0;
       encontrado = true;
       if (v.idVoluntario == id) {
-        v.idadeVoluntario = Integer.parseInt(JOptionPane.showInputDialog("Informe a idade do voluntário: "));
+        System.out.println("Informe a nova idade do voluntário: ");
+        v.idadeVoluntario = scan.nextInt();
       }
     }
     if (encontrado == true) {
@@ -68,14 +77,14 @@ public class GestaoVoluntario {
   }
 
   // Editar endereço voluntário
-  public String alterarEnderecoVoluntario(int idVoluntario) {
+  public String alterarEnderecoVoluntario(int id) {
     boolean encontrado = false;
 
     for (Voluntario v : this.listaDeVoluntarios) {
-      int id = 0;
       encontrado = true;
       if (v.idVoluntario == id) {
-        v.enderecoVoluntario = JOptionPane.showInputDialog("Informe o endereço atualizado: ");
+        System.out.println("Informe o endereço atualizado: ");
+        v.enderecoVoluntario = scan.next();
       }
     }
     if (encontrado == true) {
@@ -87,14 +96,14 @@ public class GestaoVoluntario {
   }
 
   // Editar telefone voluntário
-  public String alterarTelefoneVoluntario(int idVoluntario) {
+  public String alterarTelefoneVoluntario(int id) {
     boolean encontrado = false;
 
     for (Voluntario v : this.listaDeVoluntarios) {
-      int id = 0;
       encontrado = true;
       if (v.idVoluntario == id) {
-        v.telefone = JOptionPane.showInputDialog("Informe o contato atualizado: ");
+        System.out.println("Informe o contato atualizado: ");
+        v.telefone = scan.next();
       }
     }
     if (encontrado == true) {
@@ -104,5 +113,5 @@ public class GestaoVoluntario {
     }
 
   }
-  
+
 }
