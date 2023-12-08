@@ -1,10 +1,8 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
-
 public class GestaoEstoque {
-          Scanner scan = new Scanner(System.in);
+  Scanner scan = new Scanner(System.in);
 
   public ArrayList<DoacaoEmEstoque> doacoesEstoque = new ArrayList<DoacaoEmEstoque>();
 
@@ -15,6 +13,13 @@ public class GestaoEstoque {
   public ArrayList<Doacao> doacoesCadastradas = new ArrayList<Doacao>();
 
   public void cadastrarDoacao(Doacao Doacao) {
+    int id = 1;
+    for (Doacao d : this.doacoesCadastradas) {
+      if (d.id >= id) {
+        id = d.id + 1;
+      }
+    }
+    Doacao.id = id;
     this.doacoesCadastradas.add(Doacao);
   }
 
@@ -30,9 +35,9 @@ public class GestaoEstoque {
           "\n Descrição: " +
           d.descricao +
           "\n Quantidade: " +
-          d.quantidade+"\n";
+          d.quantidade + "\n";
     }
- return mensagem;
+    return mensagem;
   }
 
   // Editar descrição doação
@@ -62,7 +67,7 @@ public class GestaoEstoque {
       encontrado = true;
       if (d.id == id) {
         System.out.println("Digite o novo ID do cadastro: ");
-        d.id =  scan.nextInt();
+        d.id = scan.nextInt();
       }
     }
     if (encontrado == true) {
