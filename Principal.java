@@ -5,17 +5,22 @@ public class Principal {
         Scanner scan = new Scanner(System.in);
         GestaoEstoque ge = new GestaoEstoque();
         GestaoVoluntario gv = new GestaoVoluntario();
+        boolean voluntarioValido = Validacao.validarIdadeVoluntario(0);
         int opcao = 0;
         int opcaoCategorias = 0;
-        int opcaoVoluntario = 0;
+        int idVoluntario = 0;
         int id = 0;
+        int opcaoMenus = 0;
+        int opcaoMenuPrincipal = 0;
+        int opcaoMenuEstoque = 0;
+        int opcaoMenuVoluntario = 0;
 
         do {
 
             // Fazer a validação do login
             EntradaSaida.escolherOpcaoMenuPrincipal();
             opcao = scan.nextInt();
-        
+
             switch (opcao) {
                 case 1:
                     // Solicitar dados e cadastrar doação no menu de categorias
@@ -23,12 +28,9 @@ public class Principal {
                     EntradaSaida.escolherOpcaoMenuCategorias();
                     opcaoCategorias = scan.nextInt();
 
-
                     switch (opcaoCategorias) {
                         case 1:
                             // Solicitar Dados Pessoais
-                            System.out.println("Insira o ID do cadastro: ");
-                            d.id = scan.nextInt();
                             System.out.println("Insira a descrição da doação: ");
                             d.descricao = scan.next();
                             System.out.println("Insira a quantidade: ");
@@ -40,8 +42,6 @@ public class Principal {
 
                         case 2:
                             // Solicitar Dados Pessoais
-                            System.out.println("Insira o ID do cadastro: ");
-                            d.id = scan.nextInt();
                             System.out.println("Insira a descrição da doação: ");
                             d.descricao = scan.next();
                             System.out.println("Insira a quantidade: ");
@@ -54,8 +54,6 @@ public class Principal {
 
                         case 3:
                             // Solicitar Dados Pessoais
-                            System.out.println("Insira o ID do cadastro: ");
-                            d.id = scan.nextInt();
                             System.out.println("Insira a descrição da doação: ");
                             d.descricao = scan.next();
                             System.out.println("Insira a quantidade: ");
@@ -68,8 +66,6 @@ public class Principal {
 
                         case 4:
                             // Solicitar Dados Pessoais
-                            System.out.println("Insira o ID do cadastro: ");
-                            d.id = scan.nextInt();
                             System.out.println("Insira a descrição da doação: ");
                             d.descricao = scan.next();
                             System.out.println("Insira o valor: ");
@@ -107,15 +103,33 @@ public class Principal {
                     System.out.println(ge.deletarDoacao(id - 1));
                     break;
 
+                case 5:
+                    // Dar entrada em doaç?es para o estoque
+
+                    break;
+
+                case 6:
+                    // Consultar doaç?es em estoque por ID
+
+                    break;
+
+                case 7:
+                    // Consultar doaç?es por categoria
+
+                    break;
+
                 case 8:
                     // Realizar cadastro para voluntariado:
                     Voluntario v = new Voluntario();
-                    System.out.println("Insira o ID do voluntário: ");
-                    v.idVoluntario = scan.nextInt();
                     System.out.println("Informe o nome do voluntário: ");
                     v.nomeVoluntario = scan.next();
-                    System.out.println("Informe a idade: ");
-                    v.idadeVoluntario = scan.nextInt();
+                    while (voluntarioValido == false) {
+                        System.out.println("Informe a idade (o voluntário tende a ser maior de 18): ");
+                        v.idadeVoluntario = scan.nextInt();
+                        voluntarioValido = Validacao.validarIdadeVoluntario(v.idadeVoluntario);
+                    }
+                      System.out.println("Informe o CPF: ");
+                    v.cpfVoluntario = scan.next();
                     System.out.println("Informe o endereço: ");
                     v.enderecoVoluntario = scan.next();
                     System.out.println("Informe o telefone: ");
@@ -127,6 +141,50 @@ public class Principal {
                 case 9:
                     // Motrar voluntários cadastrados:
                     System.out.println(gv.mostrarVoluntariosCadastrados());
+                    break;
+
+                case 10:
+                    // Editar informações dos voluntários cadastrados:
+                    EntradaSaida.escolherOpcaoMenuVoluntarios();
+                    opcaoMenuVoluntario = scan.nextInt();
+                    switch (opcaoMenuVoluntario) {
+                        case 1:
+                            // Editar nome voluntário
+                            EntradaSaida.solicitarId("alterar");
+                            id = scan.nextInt();
+                            System.out.println(gv.alterarNomeVoluntario(id));
+                            break;
+
+                        case 2:
+                            // Editar idade voluntário
+                            EntradaSaida.solicitarId("alterar");
+                            idVoluntario = scan.nextInt();
+                            System.out.println(gv.alterarIdadeVoluntario(idVoluntario));
+                            break;
+
+                        case 3:
+                            // Editar endereço voluntário
+                            EntradaSaida.solicitarId("alterar");
+                            idVoluntario = scan.nextInt();
+                            System.out.println(gv.alterarEnderecoVoluntario(idVoluntario));
+
+                            break;
+
+                        case 4:
+                            // Editar telefone voluntário
+                            EntradaSaida.solicitarId("alterar");
+                            idVoluntario = scan.nextInt();
+                            System.out.println(gv.alterarTelefoneVoluntario(idVoluntario));
+                            break;
+
+                        case 5:
+                            EntradaSaida.escolherOpcaoMenuPrincipal();
+                            break;
+
+                        default:
+                            System.exit(0);
+                            break;
+                    }
                     break;
 
                 default:
